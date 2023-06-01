@@ -1,0 +1,14 @@
+RewriteEngine On    # Turn on the rewriting engine
+RewriteRule ^read$ public/read-user.php [NC,L]
+RewriteRule ^read/([0-9_-]*)$ public/read.php?id=$1 [NC,L]
+RewriteRule ^usercreate$ public/create-user.php [NC,L]
+RewriteRule ^userupdate$ public/update-user.php [NC,L]
+RewriteRule ^userdelete$ delete-user.php [NC,L]
+
+RewriteRule ^aliascreate$ create-alias.php [NC,L]
+RewriteRule ^aliasread$ read-alias.php [NC,L]
+RewriteRule ^aliasupdate$ update-alias.php [NC,L]
+RewriteRule ^aliasdelete$ delete-alias.php [NC,L]
+
+RewriteRule ^login$ /public/login-user.php [NC,L]
+RewriteRule ^logout$ /public/logout-user.php [NC,L]
