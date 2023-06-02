@@ -6,8 +6,8 @@ header('Access-Control-Allow-Origin:*');
 header('Access-Control-Allow-Method:POST');
 header('Content-Type:application/json');
 include '../database/Database.php';
-
-$obj = new Database();
+$conf = parse_ini_file('/etc/projectsconf/jwtldap.ini');
+$obj = new Database($conf['mysql_host'], $conf['mysql_username'], utf8_decode(base64_decode($conf['mysql_password'])), $conf['mysql_database']);
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $data = json_decode(file_get_contents("php://input", true));

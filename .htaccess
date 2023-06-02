@@ -1,6 +1,9 @@
 RewriteEngine On    # Turn on the rewriting engine
 RewriteRule ^read$ public/read-user.php [NC,L]
 RewriteRule ^read/([0-9_-]*)$ public/read.php?id=$1 [NC,L]
+
+RewriteRule ^ldapread$ public/read-ldap.php [NC,L]
+
 RewriteRule ^usercreate$ public/create-user.php [NC,L]
 RewriteRule ^userupdate$ public/update-user.php [NC,L]
 RewriteRule ^userdelete$ delete-user.php [NC,L]

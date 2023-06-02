@@ -5,8 +5,8 @@ header("Access-Control-Allow-Methods: DELETE");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 include_once '../database/Database.php';
-$database = new Database();
-$obj = new Database();
+$conf = parse_ini_file('/etc/projectsconf/jwtldap.ini');
+$obj = new Database($conf['mysql_host'], $conf['mysql_username'], utf8_decode(base64_decode($conf['mysql_password'])), $conf['mysql_database']);
 
 if ($_SERVER['REQUEST_METHOD'] == "DELETE") {
     $data = json_decode(file_get_contents("php://input", true));

@@ -5,7 +5,9 @@ header("Content-Type: application/json; charset=UTF-8");
 include '../database/Database.php';
 include '../vendor/autoload.php';
 use \Firebase\JWT\JWT;
-$obj = new Database();
+$conf = parse_ini_file('/etc/projectsconf/jwtldap.ini');
+$obj = new Database($conf['mysql_host'], $conf['mysql_username'], utf8_decode(base64_decode($conf['mysql_password'])), $conf['mysql_database']);
+#$obj = new Database();
 
 if($_SERVER["REQUEST_METHOD"] == "GET"){
    try{

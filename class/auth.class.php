@@ -40,4 +40,13 @@ class Auth {
     $log_entry = "[" . date("Y-m-d H:i:s") . "] " . $message . "\n";
     file_put_contents($log_file, $log_entry, FILE_APPEND);
   }
+
+  public function fetchuserdata($username) {
+	  $user_details = $this->ldap_connection->get_user_details($username);
+	  if(!empty($user_details)){
+		  return $user_details;
+	  }
+    return false;
+  }
+
 }

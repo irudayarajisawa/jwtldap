@@ -1,22 +1,28 @@
 <?php
-$conf = parse_ini_file('/etc/projectsconf/jwtldap.ini');
+#public $conf = parse_ini_file('/etc/projectsconf/jwtldap.ini');
 
 class Database
 {
-    private $localhost = $conf['mysql_host'];
-    private $username = $conf['mysql_username'];
-    private $password = utf8_decode(base64_decode($conf['mysql_password']));
-    private $database = $conf['mysql_database'];
+    private $localhost; # = 'localhost';#$conf['mysql_host'];
+    private $username; # = $conf['mysql_username'];
+    private $password; # = utf8_decode(base64_decode($conf['mysql_password']));
+    private $database; # = $conf['mysql_database'];
 
     private $mysqli = "";
     private $result = array();
     private $conn = false;
 
     //connect database using consturcted method
-    public function __construct()
+    public function __construct($localhost, $username, $password, $database)
     {
+	    $this->localhost = $localhost;
+	    $this->username = $username;
+	    $this->password = $password;
+	    $this->database = $database;
+
         if (!$this->conn) {
             $this->mysqli = new mysqli($this->localhost, $this->username, $this->password, $this->database);
+            #$this->mysqli = new mysqli($localhost, $username, $password, $database);
             $this->conn = true;
 
             if ($this->mysqli->connect_error) {

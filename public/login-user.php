@@ -9,15 +9,12 @@ include('../class/auth.class.php');
 
 use \Firebase\JWT\JWT;
 $conf = parse_ini_file('/etc/projectsconf/jwtldap.ini');
-$obj = new Database();
+$obj = new Database($conf['mysql_host'], $conf['mysql_username'], utf8_decode(base64_decode($conf['mysql_password'])), $conf['mysql_database']);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents("php://input", true));
-    #$email = htmlentities($data->email);
     $username = htmlentities($data->username);
     $password = htmlentities($data->password);
-#    $email = 'test@example.com';
-#    $password = '123456';
 
     #$obj->select('users', '*', null, "email='{$email}'", null, null);
     $obj->select('users', '*', null, "username='{$username}'", null, null);
